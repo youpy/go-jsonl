@@ -15,7 +15,8 @@ func TestUnmarshal(t *testing.T) {
 	var result []foo
 
 	jsonlData := `{"bar":"aaa"}
-{"bar":"bbb"}`
+{"bar":"bbb"}
+`
 
 	err := jsonl.Unmarshal([]byte(jsonlData), &result)
 

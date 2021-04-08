@@ -7,7 +7,13 @@ import (
 
 func Unmarshal(data []byte, v interface{}) error {
 	lines := bytes.Split(data, []byte("\n"))
-	joined := bytes.Join(lines, []byte(","))
+	filtered := [][]byte{}
+	for _, line := range lines {
+		if len(line) > 0 {
+			filtered = append(filtered, line)
+		}
+	}
+	joined := bytes.Join(filtered, []byte(","))
 	jsonData := bytes.Join([][]byte{[]byte("["), joined, []byte("]")}, []byte(""))
 	err := json.Unmarshal(jsonData, v)
 	if err != nil {
